@@ -12,6 +12,7 @@ import 'package:neopop/neopop.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:im_stepper/main.dart';
 import 'package:im_stepper/stepper.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -1230,22 +1231,42 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
 
                 Container(
-                  height: 100,
+                  height: 200,
                   color: Color(0xff19212b),
                   child: Center(
-                    child: Text(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
 
-                        "Portfolio entièrement conçu en utilisant le language DART et le framework Flutter ",
+                            "Portfolio entièrement conçu en utilisant le language DART et le framework Flutter ",
 
-                        style: GoogleFonts.gruppo(
-                            textStyle: TextStyle(
-                              color: Colors.white,
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                              fontStyle: FontStyle.normal,
 
-                            ))
-                    ),
+                            style: GoogleFonts.gruppo(
+                                textStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                  fontStyle: FontStyle.normal,
+
+                                ))
+                        ),
+                        TextButton(onPressed: _launchUrl,
+                            child: Text(
+                              "Cliquer ici pour voir le code source ",
+                              style: GoogleFonts.getFont('Press Start 2P',
+                                textStyle: TextStyle(
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w100,
+                                  fontStyle: FontStyle.normal,
+
+                                ),
+                              ),
+                            ),)
+                      ],
+                    )
                   ),
                 )
 
@@ -1261,5 +1282,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
     );
+  }
+  Future<void> _launchUrl() async {
+    final Uri _url = Uri.parse('https://github.com/OmarEssalek/code_source_portfolio.git');
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
   }
 }
